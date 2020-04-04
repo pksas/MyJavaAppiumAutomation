@@ -151,7 +151,7 @@ public class FirstTest {
         );
 
         waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@index='1']"),
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[2]"),
                 "Cannot find second topic searching by 'Some word'",
                 15
         );
@@ -163,7 +163,7 @@ public class FirstTest {
         );
 
         waitForElementNotPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@index='0']"),
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[1]"),
                 "Search result still present on the page",
                 5
         );

@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -178,6 +179,45 @@ public class FirstTest {
         );
 
         checkingDefaultTextInSearchPlate();
+    }
+
+    @Test
+    public void testSearchWordPresentInAllSearchResults()
+    {
+        String search_word = "jaVa";
+
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search…')]"),
+                search_word,
+                "Cannot find search input",
+                5
+        );
+
+        int container_number = 1;
+        int timeout_in_seconds = 15;
+        while (true)
+        {
+            try {
+                WebElement element = waitForElementPresent(
+                        By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[" + container_number + "]//*[@resource-id='org.wikipedia:id/page_list_item_title']"),
+                        "Nobody will read this message)))",
+                        timeout_in_seconds
+                );
+                boolean isSearchWordPresence = element.getAttribute("text").toLowerCase().contains(search_word.toLowerCase());
+                Assert.assertTrue("The searched word is not in the title of the article  " + container_number, isSearchWordPresence);
+                timeout_in_seconds = 1; // Если мы тут, то все результаты поиска уже на экране и нет необходимости в большом таймауте.
+                container_number++;
+            } catch (TimeoutException e) {
+                break;
+            }
+        }
+        Assert.assertTrue("This search has no result!", container_number != 1);
     }
 
     private void checkingDefaultTextInSearchPlate() {

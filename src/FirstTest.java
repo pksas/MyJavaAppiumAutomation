@@ -168,6 +168,34 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testDefaultTextInSearchPlate()
+    {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        checkingDefaultTextInSearchPlate();
+    }
+
+    private void checkingDefaultTextInSearchPlate() {
+        WebElement search_element = waitForElementPresent(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Cannot find search input",
+                5
+        );
+
+        String search_text = search_element.getAttribute("text");
+
+        Assert.assertEquals(
+                "We don't see default text 'Search…' in search plate!",
+                "Search…",
+                search_text
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);

@@ -199,6 +199,14 @@ public class FirstTest {
                 5
         );
 
+        //попытка определить количество резульатов поиска на странице
+        WebElement last_element = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[last()]"),
+                "This search has no result!",
+                5
+        );
+        System.out.println("The index of last element is: " + last_element.getAttribute("index"));
+
         int container_number = 1;
         int timeout_in_seconds = 15;
         while (true)

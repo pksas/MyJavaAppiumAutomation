@@ -353,8 +353,6 @@ public class FirstTest {
                 5
         );
 
-        System.out.println("start!!!");
-
         waitForElementAndClick(
                 By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
                 "Cannot close article, cannot find 'x' link",

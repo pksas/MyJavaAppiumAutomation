@@ -58,7 +58,6 @@ public class FirstTest extends CoreTestCase {
 
     @Test
     public void testSearch() {
-
         SearchPageObject searchPageObject = new SearchPageObject(driver);
 
         searchPageObject.initSearchInput();
@@ -69,37 +68,12 @@ public class FirstTest extends CoreTestCase {
     @Test
     public void testCancelSearch()
     {
-        mainPageObject.waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find 'Search Wikipedia' input",
-                5
-        );
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
 
-        mainPageObject.waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search…')]"),
-                "Java",
-                "Cannot find search input",
-                5
-        );
-
-        mainPageObject.waitForElementAndClear(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find search field",
-                5
-        );
-
-        mainPageObject.waitForElementAndClick(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "Cannot 'x' to cancel search",
-                5
-        );
-
-        mainPageObject.waitForElementNotPresent(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "'x' still present on the page",
-                5
-        );
-    }
+        searchPageObject.initSearchInput();
+        searchPageObject.ClickCancelSearch();
+        searchPageObject.waitForCancelButtonToDisappear();
+}
 
     @Test
     public void testCompareArticleTitle()

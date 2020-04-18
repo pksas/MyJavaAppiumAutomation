@@ -1,10 +1,8 @@
 import lib.CoreTestCase;
 import lib.ui.*;
-import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -53,44 +51,6 @@ public class FirstTest extends CoreTestCase {
         } catch (NoSuchElementException e) {
             System.out.println("no instance(((");
         }
-}
-
-    @Test
-    public void testSearch() {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        searchPageObject.typeSearchLine("java");
-        searchPageObject.waitForSearchResult("Object-oriented programming language");
-    }
-
-    @Test
-    public void testCancelSearch()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        searchPageObject.ClickCancelSearch();
-        searchPageObject.waitForCancelButtonToDisappear();
-}
-
-    @Test
-    public void testCompareArticleTitle()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        searchPageObject.typeSearchLine("java");
-        searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
-
-        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
-        String article_title = articlePageObject.getArticleTitle();
-
-        Assert.assertEquals(
-                "We see unexpected title!",
-                "Java (programming language)",
-                article_title
-        );
     }
 
     @Test
@@ -168,117 +128,10 @@ public class FirstTest extends CoreTestCase {
 
         for (WebElement element : search_title_elements) {
             boolean isSearchWordPresence = element.getAttribute("text").toLowerCase().contains(search_word.toLowerCase());
-            Assert.assertTrue("The searched word is not in all titles of articles!!!", isSearchWordPresence);
+            assertTrue("The searched word is not in all titles of articles!!!", isSearchWordPresence);
         }
     }
 
-    @Test
-    public void testSwipeArticle()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        searchPageObject.typeSearchLine("Appium");
-        searchPageObject.clickByArticleWithSubstring("Appium");
-
-        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
-        articlePageObject.waitForTitleElement();
-        articlePageObject.swipeToFooter();
-}
-
-    @Test
-    public void testSaveFirstArticleToMyList()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        searchPageObject.typeSearchLine("java");
-        searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
-
-        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
-        articlePageObject.waitForTitleElement();
-        String article_title = articlePageObject.getArticleTitle();
-        String name_of_folder = "Learning programming";
-        articlePageObject.addArticleToMyList(name_of_folder);
-        articlePageObject.closeArticle();
-
-        NavigationUI navigationUI = new NavigationUI(driver);
-        navigationUI.clickMyList();
-
-        MyListsPageObject myListsPageObject = new MyListsPageObject(driver);
-        myListsPageObject.openFolderByName(name_of_folder);
-        myListsPageObject.swipeByArticleToDelete(article_title);
-    }
-
-    @Test
-    public void testAmountOfNotEmptySearch()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        String search_line = "Linkin park Diskography";
-        searchPageObject.typeSearchLine(search_line);
-        int amount_of_search_results = searchPageObject.getAmountOfFoundArticle();
-
-        Assert.assertTrue(
-                "We found too few results",
-                amount_of_search_results > 0
-        );
-    }
-
-    @Test
-    public void testAmountOfEmptySearch()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        String search_line = "Java11111";
-        searchPageObject.typeSearchLine(search_line);
-        searchPageObject.waitForEmptyResultLabel();
-        searchPageObject.assertThereIsNoResultOfSearch();
-    }
-
-    @Test
-    public void testChangeScreenOrientationOnSearchResults()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        searchPageObject.typeSearchLine("Java");
-        searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
-
-        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
-        String title_before_rotation = articlePageObject.getArticleTitle();
-        this.rotateScreenLandscape();
-        String title_after_rotation = articlePageObject.getArticleTitle();
-
-        Assert.assertEquals(
-                "Article title have been changed after screen rotation",
-                title_before_rotation,
-                title_after_rotation
-        );
-
-        this.rotateScreenPortrait();
-        String title_after_second_rotation = articlePageObject.getArticleTitle();
-
-        Assert.assertEquals(
-                "Article title have been changed after second screen rotation",
-                title_after_rotation,
-                title_after_second_rotation
-        );
-    }
-
-    @Test
-    public void testCheckSearchArticleInBackground()
-    {
-        SearchPageObject searchPageObject = new SearchPageObject(driver);
-
-        searchPageObject.initSearchInput();
-        searchPageObject.typeSearchLine("Java");
-        searchPageObject.waitForSearchResult("Object-oriented programming language");
-        this.backgroundApp(2);
-        searchPageObject.waitForSearchResult("Object-oriented programming language");
-    }
 
     @Test
     public void testSaveTwoArticlesToMyListAndDeleteOneFrom()

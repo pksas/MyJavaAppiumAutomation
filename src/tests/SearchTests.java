@@ -52,4 +52,17 @@ public class SearchTests extends CoreTestCase
         searchPageObject.ClickCancelSearch();
         searchPageObject.waitForCancelButtonToDisappear();
     }
+
+    @Test
+    public void testSearchAndCancelSearch()
+    {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("Some word");
+        int amount_of_search_results = searchPageObject.getAmountOfFoundArticle();
+        assertTrue("No more than one search result was found", amount_of_search_results > 1);
+        searchPageObject.ClickCancelSearch();
+        searchPageObject.assertThereIsNoResultOfSearch();
+    }
 }

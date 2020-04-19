@@ -54,41 +54,6 @@ public class FirstTest extends CoreTestCase {
     }
 
     @Test
-    public void testSearchAndCancelSearch()
-    {
-        mainPageObject.waitForElementAndClick(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Cannot find 'Search Wikipedia' input",
-                5
-        );
-
-        mainPageObject.waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search…')]"),
-                "Some word",
-                "Cannot find search input",
-                5
-        );
-
-        mainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[2]"),
-                "Cannot find second topic searching by 'Some word'",
-                15
-        );
-
-        mainPageObject.waitForElementAndClick(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "Cannot 'x' to cancel search",
-                5
-        );
-
-        mainPageObject.waitForElementNotPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[1]"),
-                "Search result still present on the page",
-                5
-        );
-    }
-
-    @Test
     public void testDefaultTextInSearchPlate()
     {
         mainPageObject.waitForElementAndClick(

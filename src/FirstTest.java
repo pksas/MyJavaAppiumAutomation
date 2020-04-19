@@ -96,35 +96,4 @@ public class FirstTest extends CoreTestCase {
             assertTrue("The searched word is not in all titles of articles!!!", isSearchWordPresence);
         }
     }
-
-    @Test
-    public void testTiltleInArticlePresence()
-    {
-        mainPageObject.waitForElementAndClick(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Cannot find 'Search Wikipedia' input",
-                5
-        );
-
-        String search_line = "Java";
-        mainPageObject.waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search…')]"),
-                search_line,
-                "Cannot find search input",
-                5
-        );
-
-        mainPageObject.waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
-                "Cannot open 'Object-oriented programming language' article",
-                5
-        );
-
-        String search_result_locator = "//*[@resource-id='org.wikipedia:id/view_page_header_container']/*[@resource-id='org.wikipedia:id/view_page_title_text']";
-
-        mainPageObject.assertElementPresent(
-                By.xpath(search_result_locator),
-                "We've not found some results by request '" + search_line + "'"
-        );
-    }
 }

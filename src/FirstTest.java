@@ -19,41 +19,6 @@ public class FirstTest extends CoreTestCase {
     }
 
     @Test
-    public void testSimpleCrush()
-    {
-        WebElement test_element = mainPageObject.waitForElementPresent(
-                By.id("org.wikipedia:id/view_featured_article_card_article_title"),
-                "sooo...",
-                5
-        );
-        try {
-            System.out.println("text is: " + test_element.getAttribute("text"));
-        } catch (NoSuchElementException e) {
-            System.out.println("no text(((");
-        }
-        try {
-            System.out.println( "index is: " + test_element.getAttribute("index"));
-        } catch (NoSuchElementException e) {
-            System.out.println("no index(((");
-        }
-        try {
-            System.out.println("class is: " + test_element.getAttribute("class"));
-        } catch (NoSuchElementException e) {
-            System.out.println("no class(((");
-        }
-        try {
-            System.out.println("resource-id is: " + test_element.getAttribute("resource-id"));
-        } catch (NoSuchElementException e)  {
-            System.out.println("no resource-id(((");
-        }
-        try {
-            System.out.println("instance is: " + test_element.getAttribute("instance"));
-        } catch (NoSuchElementException e) {
-            System.out.println("no instance(((");
-        }
-    }
-
-    @Test
     public void testDefaultTextInSearchPlate()
     {
         mainPageObject.waitForElementAndClick(

@@ -29,36 +29,4 @@ public class FirstTest extends CoreTestCase {
 
         mainPageObject.checkingDefaultTextInSearchPlate();
     }
-
-    @Test
-    public void testSearchWordPresentInAllSearchResults()
-    {
-        String search_word = "jaVa";
-
-        mainPageObject.waitForElementAndClick(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
-                "Cannot find 'Search Wikipedia' input",
-                5
-        );
-
-        mainPageObject.waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text,'Search…')]"),
-                search_word,
-                "Cannot find search input",
-                5
-        );
-
-        mainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']/*[1]"),
-                "This search has no result!",
-                15
-        );
-
-        List<WebElement> search_title_elements = driver.findElements(By.id("org.wikipedia:id/page_list_item_title"));
-
-        for (WebElement element : search_title_elements) {
-            boolean isSearchWordPresence = element.getAttribute("text").toLowerCase().contains(search_word.toLowerCase());
-            assertTrue("The searched word is not in all titles of articles!!!", isSearchWordPresence);
-        }
-    }
 }

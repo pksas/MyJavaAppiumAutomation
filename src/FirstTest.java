@@ -22,7 +22,7 @@ public class FirstTest extends CoreTestCase {
     public void testDefaultTextInSearchPlate()
     {
         mainPageObject.waitForElementAndClick(
-                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "xpath://*[contains(@text,'Search Wikipedia')]",
                 "Cannot find 'Search Wikipedia' input",
                 5
         );

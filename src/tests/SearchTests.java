@@ -77,11 +77,6 @@ public class SearchTests extends CoreTestCase
         int amount_of_search_results = searchPageObject.getAmountOfFoundArticle();
         assertTrue("There're less than 3 search result", amount_of_search_results > 2);
 
-        searchPageObject
-                .waitForElementByTitleAndDescription("Best", "Wikimedia disambiguation page");
-        searchPageObject
-                .waitForElementByTitleAndDescription("Best Buy", "Consumer electronics retailer");
-        searchPageObject
-                .waitForElementByTitleAndDescription("Best of the Super Juniors", "NJPW tournament");
+        searchPageObject.waitForSearchElementsByTitleAndDescriptions();
     }
 }

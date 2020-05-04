@@ -2,6 +2,9 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 abstract public class SearchPageObject extends MainPageObject{
 
     protected static String
@@ -13,6 +16,8 @@ abstract public class SearchPageObject extends MainPageObject{
             SEARCH_RESULT_ELEMENT,
             SEARCH_EMPTY_RESULT_ELEMENT,
             SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL;
+
+    protected static HashMap<String, String> TITLES_AND_DESCRIPTIONS;
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -93,5 +98,12 @@ abstract public class SearchPageObject extends MainPageObject{
         this.waitForElementPresent(
                 search_result_xpath,
                 String.format("There is no search result with title '%s' and description '%s'", title, description));
+    }
+
+    public void waitForSearchElementsByTitleAndDescriptions()
+    {
+        for(Map.Entry<String, String> entry : TITLES_AND_DESCRIPTIONS.entrySet()) {
+            waitForElementByTitleAndDescription(entry.getKey(), entry.getValue());
+        }
     }
 }

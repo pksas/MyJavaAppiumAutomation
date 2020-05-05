@@ -25,23 +25,6 @@ public class MainPageObject {
         this.driver = driver;
     }
 
-
-    public void checkingDefaultTextInSearchPlate() {
-        WebElement search_element = waitForElementPresent(
-                "id:org.wikipedia:id/search_src_text",
-                "Cannot find search input",
-                5
-        );
-
-        String search_text = search_element.getAttribute("text");
-
-        Assert.assertEquals(
-                "We don't see default text 'Search…' in search plate!",
-                "Search…",
-                search_text
-        );
-    }
-
     public WebElement waitForElementPresent(String locator, String error_message, long timeoutInSeconds)
     {
         By by = this.getLocatorByString(locator);

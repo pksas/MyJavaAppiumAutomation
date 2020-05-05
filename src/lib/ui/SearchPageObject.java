@@ -1,6 +1,9 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
+import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +18,8 @@ abstract public class SearchPageObject extends MainPageObject{
             SEARCH_RESULT_BY_SUBSTRING_TPL,
             SEARCH_RESULT_ELEMENT,
             SEARCH_EMPTY_RESULT_ELEMENT,
-            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL;
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL,
+            SEARCH_PLATE_ELEMENT;
 
     protected static HashMap<String, String> TITLES_AND_DESCRIPTIONS;
 
@@ -104,6 +108,28 @@ abstract public class SearchPageObject extends MainPageObject{
     {
         for(Map.Entry<String, String> entry : TITLES_AND_DESCRIPTIONS.entrySet()) {
             waitForElementByTitleAndDescription(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public void checkingDefaultTextInSearchPlate() {
+        WebElement search_element = waitForElementPresent(
+                SEARCH_PLATE_ELEMENT,
+                "Cannot find search input",
+                5
+        );
+
+        if (Platform.getInstance().isAndroid()) {
+            Assert.assertEquals(
+                    "We don't see default text 'Search…' in search plate!",
+                    "Search…",
+                    search_element.getAttribute("text")
+            );
+        } else {
+            Assert.assertEquals(
+                    "We don't see default text 'Search…' in search plate!",
+                    "Search Wikipedia",
+                    search_element.getAttribute("name")
+            );
         }
     }
 }

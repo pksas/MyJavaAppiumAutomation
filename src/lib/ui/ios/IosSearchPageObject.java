@@ -16,6 +16,7 @@ public class IosSearchPageObject extends SearchPageObject
         SEARCH_RESULT_ELEMENT = "xpath://XCUIElementTypeCollectionView/XCUIElementTypeCell";
         SEARCH_EMPTY_RESULT_ELEMENT = "xpath://XCUIElementTypeStaticText[@name='No results found']";
         SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://XCUIElementTypeStaticText[contains(@name,'{TITLE}')]/../XCUIElementTypeStaticText[contains(@name,'{DESCRIPTION}')]";
+        SEARCH_PLATE_ELEMENT = "id:Search Wikipedia";
 
         TITLES_AND_DESCRIPTIONS = new HashMap<>();
         TITLES_AND_DESCRIPTIONS.put("Best", "Disambiguation page providing links to topics that could be referred to by the same search term");

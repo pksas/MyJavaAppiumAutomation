@@ -79,4 +79,13 @@ public class SearchTests extends CoreTestCase
 
         searchPageObject.waitForSearchElementsByTitleAndDescriptions();
     }
+
+    @Test
+    public void testDefaultTextInSearchPlate()
+    {
+        SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
+        searchPageObject.initSearchInput();
+
+        searchPageObject.checkingDefaultTextInSearchPlate();
+    }
 }

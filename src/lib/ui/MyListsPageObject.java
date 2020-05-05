@@ -1,17 +1,20 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 
-public class MyListsPageObject extends MainPageObject{
+abstract public class MyListsPageObject extends MainPageObject{
 
     public MyListsPageObject(AppiumDriver driver)
     {
         super(driver);
     }
 
-    private static final String
-            FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TITLE_TPL = "xpath://*[@text='{TITLE}']";
+    protected static String
+            FOLDER_BY_NAME_TPL,
+            ARTICLE_BY_TITLE_TPL,
+            SYNC_YOUR_SAVED_ARTICLES_QUESTION_WINDOW_CLOSE_BUTTON,
+            SWIPE_ACTION_DELETE_BUTTON;
 
     /* TEMPLATES METHODS */
     private static String getFolderXpathByName(String name_of_folder)
@@ -63,6 +66,12 @@ public class MyListsPageObject extends MainPageObject{
               article_xpath,
                 "Cannot find saved article with title " + article_title
         );
+        if (Platform.getInstance().isIOS()) {
+            this.waitForElementAndClick(
+                    SWIPE_ACTION_DELETE_BUTTON,
+                    "Cannot find confirm delete action button",
+                    5);
+        }
         this.waitForArticleToDisappearByTitle(article_title);
     }
 
@@ -80,5 +89,13 @@ public class MyListsPageObject extends MainPageObject{
                 "Cannot open article with title " + article_title,
                 5
         );
+    }
+
+    public void closeSyncYourSavedArticlesQuestionWindow()
+    {
+        this.waitForElementAndClick(
+                SYNC_YOUR_SAVED_ARTICLES_QUESTION_WINDOW_CLOSE_BUTTON,
+                "Cannot find 'x' button to close 'sync your saved articles' window",
+                5);
     }
 }

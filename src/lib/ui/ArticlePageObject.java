@@ -16,7 +16,8 @@ abstract public class ArticlePageObject extends MainPageObject
         MY_LIST_OK_BUTTON,
         CLOSE_ARTICLE_BUTTON,
         SEARCH_BUTTON,
-        FOLDER_BY_NAME_TPL;
+        FOLDER_BY_NAME_TPL,
+        GO_TO_MAIN_PAGE_BUTTON;
 
     public ArticlePageObject(AppiumDriver driver)
     {
@@ -146,5 +147,15 @@ abstract public class ArticlePageObject extends MainPageObject
                 "Cannot find '" + name_of_folder + "' folder for adding article to it",
                 5
         );
+    }
+
+    public void addArticlesToMySaved()
+    {
+        this.waitForElementAndClick(OPTiONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 15);
+    }
+
+    public void goToMainWikiPage()
+    {
+        this.waitForElementAndClick(GO_TO_MAIN_PAGE_BUTTON, "Cannot find 'W' button to go to the main page", 5);
     }
 }

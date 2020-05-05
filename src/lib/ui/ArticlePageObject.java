@@ -17,7 +17,8 @@ abstract public class ArticlePageObject extends MainPageObject
         CLOSE_ARTICLE_BUTTON,
         SEARCH_BUTTON,
         FOLDER_BY_NAME_TPL,
-        GO_TO_MAIN_PAGE_BUTTON;
+        GO_TO_MAIN_PAGE_BUTTON,
+        NAVIGATION_BAR;
 
     public ArticlePageObject(AppiumDriver driver)
     {
@@ -157,5 +158,11 @@ abstract public class ArticlePageObject extends MainPageObject
     public void goToMainWikiPage()
     {
         this.waitForElementAndClick(GO_TO_MAIN_PAGE_BUTTON, "Cannot find 'W' button to go to the main page", 5);
+    }
+
+    public String getArticleNavigationBar()
+    {
+        WebElement element = this.waitForElementPresent(NAVIGATION_BAR, "Cannot find navigation bar on the page");
+        return element.getAttribute("name");
     }
 }

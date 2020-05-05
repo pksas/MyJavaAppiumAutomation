@@ -61,27 +61,50 @@ public class MyListsTests extends CoreTestCase
         ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
         articlePageObject.waitForTitleElement();
         String first_article_title = articlePageObject.getArticleTitle();
-        String name_of_folder = "Learning programming";
-        articlePageObject.addArticleToMyFirstList(name_of_folder);
-
         String second_article_title = "Appium";
+
+        if (Platform.getInstance().isAndroid()) {
+            articlePageObject.addArticleToMyFirstList(name_of_folder);
+        } else {
+            articlePageObject.addArticlesToMySaved();
+        }
+
         articlePageObject.initSearchInput();
         searchPageObject.typeSearchLine("Appium");
         searchPageObject.clickByArticleWithSubstring(second_article_title);
-        articlePageObject.addArticleToMyExistigList(name_of_folder);
-        articlePageObject.closeArticle();
+        if (Platform.getInstance().isAndroid()) {
+            articlePageObject.addArticleToMyExistigList(name_of_folder);
+            articlePageObject.closeArticle();
+        } else {
+            articlePageObject.addArticlesToMySaved();
+            articlePageObject.goToMainWikiPage();
+        }
 
         NavigationUI navigationUI = NavigationUIFactory.get(driver);
         navigationUI.clickMyList();
 
         MyListsPageObject myListsPageObject = MyListsPageObjectFactory.get(driver);
-        myListsPageObject.openFolderByName(name_of_folder);
+        if (Platform.getInstance().isIOS()) {
+            myListsPageObject.closeSyncYourSavedArticlesQuestionWindow();
+        }
+        if (Platform.getInstance().isAndroid()) {
+            myListsPageObject.openFolderByName(name_of_folder);
+        }
+
         myListsPageObject.swipeByArticleToDelete(first_article_title);
         myListsPageObject.assertThereIsNotArticleWithThisTitle(first_article_title);
         myListsPageObject.waitForArticleByTitleAndOpenIt(second_article_title);
 
-        assertEquals(
-                "Cannot find title of remaining article",
-                articlePageObject.getArticleTitle(), second_article_title);
+        if (Platform.getInstance().isAndroid()) {
+            assertEquals(
+                    "Cannot find title of remaining article",
+                    articlePageObject.getArticleTitle(), second_article_title
+            );
+        } else {
+            assertEquals(
+                    "",
+                    articlePageObject.getArticleNavigationBar(), second_article_title
+            );
+        }
     }
 }

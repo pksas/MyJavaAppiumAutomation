@@ -14,7 +14,7 @@ public class IosArticlePageObject extends ArticlePageObject
         CLOSE_ARTICLE_BUTTON = "id:Back";
         SEARCH_BUTTON = "id:Search Wikipedia";
         FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']";
-        NAVIGATION_BAR = "xpath://XCUIElementTypeNavigationBar";
+//        NAVIGATION_BAR = "xpath://XCUIElementTypeNavigationBar";
     }
 
     public IosArticlePageObject(AppiumDriver driver) {

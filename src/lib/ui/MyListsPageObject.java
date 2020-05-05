@@ -91,11 +91,11 @@ abstract public class MyListsPageObject extends MainPageObject{
         );
     }
 
-    public void closeSyncYourSavedArticlesQuestionWindow()
-    {
-        this.waitForElementAndClick(
-                SYNC_YOUR_SAVED_ARTICLES_QUESTION_WINDOW_CLOSE_BUTTON,
-                "Cannot find 'x' button to close 'sync your saved articles' window",
-                5);
-    }
+//    public void closeSyncYourSavedArticlesQuestionWindow()
+//    {
+//        this.waitForElementAndClick(
+//                SYNC_YOUR_SAVED_ARTICLES_QUESTION_WINDOW_CLOSE_BUTTON,
+//                "Cannot find 'x' button to close 'sync your saved articles' window",
+//                5);
+//    }
 }

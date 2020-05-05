@@ -155,10 +155,10 @@ abstract public class ArticlePageObject extends MainPageObject
         this.waitForElementAndClick(OPTiONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 15);
     }
 
-//    public void goToMainWikiPage()
-//    {
-//        this.waitForElementAndClick(GO_TO_MAIN_PAGE_BUTTON, "Cannot find 'W' button to go to the main page", 5);
-//    }
+    public void goToMainWikiPage()
+    {
+        this.waitForElementAndClick(GO_TO_MAIN_PAGE_BUTTON, "Cannot find 'W' button to go to the main page", 5);
+    }
 
     public String getArticleNavigationBar()
     {

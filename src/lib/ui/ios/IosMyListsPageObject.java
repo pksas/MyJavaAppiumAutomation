@@ -8,7 +8,7 @@ public class IosMyListsPageObject extends MyListsPageObject
     static
     {
         ARTICLE_BY_TITLE_TPL = "xpath://XCUIElementTypeStaticText[contains(@name,'{TITLE}')]";
-//        SYNC_YOUR_SAVED_ARTICLES_QUESTION_WINDOW_CLOSE_BUTTON = "id:Close";
+        SYNC_YOUR_SAVED_ARTICLES_QUESTION_WINDOW_CLOSE_BUTTON = "id:Close";
         SWIPE_ACTION_DELETE_BUTTON = "id:swipe action delete";
     }
 
